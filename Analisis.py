@@ -1,8 +1,5 @@
 #!/home/inb/lconcha/fmrilab_software/miniconda2/bin/python
 # coding: utf-8
-
-# In[1]:
-
 from mvpa2.suite import *
 import os.path
 
@@ -32,8 +29,9 @@ subjString = 'sub' + '%03d' % subject #string que denota el participante a carga
 
 # In[ ]:
 
-run_datasets = [] #array donde se meteran los datos
-for run_id in runsToTrain: #Se mueve corrida por corrida para cargar cada dato
+
+run_datasets = []
+for run_id in runs_to_train:
     # genera path de la mascara
     mask_fname = os.path.join(datapath, 'sub001', 'masks', 'orig', 'aza_LM1' + '.nii.gz')
     # carga los vectores
