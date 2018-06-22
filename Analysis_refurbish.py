@@ -4,37 +4,22 @@ from mvpa2.suite import *
 import os.path
 
 
-# # Variables iniciales
-
-# In[12]:
-
-datapath = '/misc/giora/azalea/MVPA/data/verbose/data' #depending on the experiment to be run
-
-subj = 1 #participante
-maskName = 'aza_LM1' #nombre de la mascara a cargar
-maskFolder = 'orig' #folder del cual se debe obtener la mascara
-runsToTrain = [1, 2, 3, 4] #corridas para entrenar
-runsToTest = [5, 6, 7, 8] #corridas para probar
-HemoCor = 8
+data_path = '/misc/giora/azalea/MVPA/data/verbose/data'
+subject = 1
+mask_name = 'aza_LM1'
+mask_folder = 'orig'
+runs_to_train = [1, 2, 3, 4]
+runs_to_test = [5, 6, 7, 8]
+hemo_cor = 8
 model = 1
 task = 1
-dhandle = OpenFMRIDataset(datapath) #crea un handle del sitio donde se encuentran los datos
-subjString = 'sub' + '%03d' % subject #string que denota el participante a cargar
-
-
-
-
-
-# # Cargar los datos para entrenar al clasificador
-
-# In[ ]:
-
+dhandle = OpenFMRIDataset(datapath)
+subjString = 'sub' + '%03d' % subject
 
 run_datasets = []
 for run_id in runs_to_train:
-    # genera path de la mascara
-    mask_fname = os.path.join(datapath, 'sub001', 'masks', 'orig', 'aza_LM1' + '.nii.gz')
-    # carga los vectores
+    mask_fname = os.path.join(datapath, 'sub001', 'masks', 'orig', mask_name + '.nii.gz')
+
     run_events = dhandle.get_bold_run_model(model, subj, run_id)
     # carga la corrida pero solamente el volumen comprendido dentro de la mascara
     run_ds = dhandle.get_bold_run_dataset(subj, task, run_id, chunks=run_id -1, mask=mask_fname)
