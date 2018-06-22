@@ -1,39 +1,23 @@
 #!/home/inb/lconcha/fmrilab_software/miniconda2/bin/python
 # coding: utf-8
-
-# In[1]:
-
 from mvpa2.suite import *
 import os.path
 
 
-# # Variables iniciales
-
-# In[12]:
-
-datapath = '/media/sf_usr/share/data/objetos/data' #depending on the experiment to be run
-
-subj = 1 #participante
-maskName = 'aza_LM1' #nombre de la mascara a cargar
-maskFolder = 'orig' #folder del cual se debe obtener la mascara
-runsToTrain = [1,2,3,4] #corridas para entrenar
-runsToTest = [5,6,7,8] #corridas para probar
-HemoCor = 8
+data_path = '/misc/giora/azalea/MVPA/data/verbose/data'
+subject = 1
+mask_name = 'aza_LM1'
+mask_folder = 'orig'
+runs_to_train = [1, 2, 3, 4]
+runs_to_test = [5, 6, 7, 8]
+hemo_cor = 8
 model = 1
 task = 1
-dhandle = OpenFMRIDataset(datapath) #crea un handle del sitio donde se encuentran los datos
-subjString = 'sub' + '%03d' % n #string que denota el participante a cargar
+dhandle = OpenFMRIDataset(datapath)
+subjString = 'sub' + '%03d' % subject
 
-
-
-
-
-# # Cargar los datos para entrenar al clasificador
-
-# In[ ]:
-
-run_datasets = [] #array donde se meteran los datos
-for run_id in runsToTrain: #Se mueve corrida por corrida para cargar cada dato
+run_datasets = []
+for run_id in runs_to_train:
     # genera path de la mascara
     mask_fname = os.path.join(datapath, 'sub001', 'masks', 'orig', 'aza_LM1' + '.nii.gz')
     # carga los vectores
